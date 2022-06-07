@@ -1,16 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  
+  <router-view></router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 // import axios from 'axios'
-import jsonp from 'jsonp'
+//import jsonp from 'jsonp'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+ 
   },
   mounted(){
     //let url="https://mock.mengxuegu.com/mock/629e0221ee30d248b590ecbc/example/query"
@@ -19,11 +19,11 @@ export default {
 
     // })
     //jsonp跨域
-    let url="/api/activity/servicetime";
-    jsonp(url,(err,res)=>{
-      let result=res;
-      this.data=result;
-    })
+    // let url="/api/activity/servicetime";
+    // jsonp(url,(err,res)=>{
+    //   let result=res;
+    //   this.data=result;
+    // })
   }
 }
 </script>
