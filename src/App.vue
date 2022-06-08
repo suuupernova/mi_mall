@@ -7,6 +7,7 @@
 
 // import axios from 'axios'
 //import jsonp from 'jsonp'
+//import storage from "./storage/index"
 export default {
   name: 'App',
   components: {
@@ -24,6 +25,8 @@ export default {
     //   let result=res;
     //   this.data=result;
     // })
+   
+    
   }
 }
 </script>
