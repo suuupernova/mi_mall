@@ -1,3 +1,4 @@
+
 <template>
   <router-view/>
   
@@ -5,13 +6,19 @@
 
 <script>
 
-// import axios from 'axios'
+//import axios from 'axios'
 //import jsonp from 'jsonp'
 //import storage from "./storage/index"
+
 export default {
   name: 'App',
   components: {
  
+  },
+  data(){
+    return{
+      res:{}
+    }
   },
   mounted(){
     //let url="https://mock.mengxuegu.com/mock/629e0221ee30d248b590ecbc/example/query"
@@ -25,6 +32,15 @@ export default {
     //   let result=res;
     //   this.data=result;
     // })
+
+    //mock设置本地加载请求静态json文件
+    // this.axios.get('/mock/user/login.json').then((res)=>{
+    //   this.res=res;
+    // })
+
+    this.axios.get('/user/login').then((res)=>{
+      this.res=res;
+    });
    
     
   }
