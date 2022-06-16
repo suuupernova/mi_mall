@@ -144,11 +144,12 @@
                 this.axios.get('/products',{
                     params:{
                         categoryId:'100012',
+                        pageSize:6
                     }
                 }).then((res)=>{
-                    if(res.list.length>6){
-                        this.phoneList=res.list.slice(0,6);
-                    }
+                    
+                        this.phoneList=res.list;
+                    
                 });
             },
             goToCart(){
