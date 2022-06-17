@@ -1,11 +1,55 @@
 <template>
     <div class="index">
         <div class="container">
+            <div class="nav-menu">
+                <ul class="menu-wrap">
+                    <li class="menu-item">
+                        <a href="javascript:;">手机 电话卡</a>
+                            <div class="children">
+                                <ul v-for="(item,i) in menuList" v-bind:key="i">
+                                    <li v-for="(sub,j) in item" v-bind:key="j">
+                                        <a v-bind:href="sub?'/#/product/'+sub.id:''">
+                                            <img v-bind:src="sub?sub.img:'/imgs/item-box-1.png'" alt="">
+                                            {{sub?sub.name:'小米9'}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:;">电视 盒子</a>
+                        <div class="children"></div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:;">笔记本 平板</a>
+                        <div class="children"></div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:;">家电 插线板</a>
+                        <div class="children"></div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:;">出行 穿戴</a>
+                        <div class="children"></div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:;">智能 路由器</a>
+                        <div class="children"></div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:;">电源配件</a>
+                        <div class="children"></div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:;">生活箱包</a>
+                        <div class="children"></div>
+                    </li>
+                </ul>
+            </div>
             <div class="swiper">
                 <swiper  
                     :navigation="true"
                     :effect="'cube'"
-                    
                     :autoplay="{
                         delay: 4000,
                         disableOnInteraction: false,
@@ -98,32 +142,128 @@
                         id:'',
                         img:'/imgs/slider/slide-5.jpg'
                     },
+                ],
+                menuList:[
+                    [
+                        {
+                            id:30,
+                            img:'/imgs/item-box-1.png',
+                            name:'小米CC9',
+                        },
+                        {
+                            id:31,
+                            img:'/imgs/item-box-2.png',
+                            name:'小米8青春版',
+                        },
+                        {
+                            id:32,
+                            img:'/imgs/item-box-3.jpg',
+                            name:'Redmi K20 Pro',
+                        },
+                        {
+                            id:33,
+                            img:'/imgs/item-box-4.jpg',
+                            name:'移动4G专区',
+                        }
+                    ],
+                    [0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]
                 ]
             }
         }
     }
-    /* eslint-disable */
-    // var mySwiper = new Swiper('.swiper',{
-    //     effect : 'cube',
-    //     cubeEffect: {
-    //     slideShadows: true,
-    //     shadow: true,
-    //     shadowOffset: 100,
-    //     shadowScale: 0.6
-    //     },
-        // })
   
 </script>
 <style lang="scss">
+@import '../assets/scss/config.scss';
+@import '../assets/scss/mixin.scss';
     .index{
-        .swiper{
+        .container{
+            .nav-menu{
+                position: absolute;
+                width: 264px;
+                height:451px;
+                z-index: 9;
+                padding: 26px 0;
+                background-color: #55585a7a;
+                box-sizing: border-box;
+                .menu-wrap{
+                    .menu-item{
+                        height: 50px;
+                        line-height: 50px;
+                        a{
+                            position: relative;
+                            display: block;
+                            font-size: $fontI;
+                            color: $colorG;
+                            padding-left: 30px;
+                            &:after{
+                                position: absolute;
+                                right: 30px;
+                                top:17.5px;
+                                content: " ";
+                                @include bgImg(10px,15px,'../../public/imgs/icon-arrow.png')
+                            }
+                        }
+                        &:hover{
+                            background-color: $colorA;
+                            .children{
+                                display: block;
+                            }
+                        }
+                        .children{
+                            display: none;
+                            width: 962px;
+                            height: 451px;
+                            
+                            position: absolute;
+                            top: 0;
+                            left: 264px;
+                            border: 1px solid $colorH;
+                            ul{
+                                background-color: $colorG;
+                                display: flex;
+                                justify-content: space-between;
+                                height: 75px;
+                                li{
+                                    height: 75px;
+                                    line-height: 75px;
+                                    flex: 1;
+                                    padding-left: 23px;
+                                }
+                                a{
+                                    color:$colorB;
+                                    font-size: $fontJ;
+                                }
+                                img{
+                                    width: 42px;
+                                    height: 35px;
+                                    vertical-align: middle;
+                                    margin-right: 15px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             
-                
+            .swiper{
+                .swiper-button-prev{
+                    left: 274px;
+                    color: $colorD;
+                }
+                .swiper-button-next{
+                    color: $colorD;
+                }
                 height: 451px;
                 img{
                     width: 100%;
-                }     
+                    
+                } 
+            }  
+                    
+            
         }
+        
     }
 </style>
 
