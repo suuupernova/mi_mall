@@ -2,7 +2,27 @@
     <div class="index">
         <div class="container">
             <div class="swiper">
-                <swiper v-bind:options="swiperOption">
+                <swiper  
+                    :navigation="true"
+                    :effect="'cube'"
+                    
+                    :autoplay="{
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    }"
+                    :cubeEffect="{
+                        slideShadows:true,
+                        shadow:true,
+                        shadowOffsets:100,
+                        shadowScale:0.6   
+                    }"
+                    :pagination="{
+                        clickable: true,
+                    }"
+                    
+                    :modules="modules"
+                    
+                >
                     <swiper-slide v-for="(item,index) in slideList" v-bind:key="index">
                         <a v-bind:href="'/#/product/'+item.id"><img v-bind:src="item.img" alt=""></a>
                     </swiper-slide>
@@ -12,6 +32,7 @@
                      -->
                      <!-- <div class="swiper-pagination"></div> -->
                 </swiper>
+                
             </div>
             <div class="ads"></div>
             <div class="banner"></div>
@@ -25,10 +46,15 @@
 
 </template>
 <script>
+//import { Pagination, A11y, Autoplay } from 'swiper'
     import 'swiper/css';
-    //import { Pagination } from 'swiper';
+    import "swiper/css/effect-cube";
+    import "swiper/css/navigation";
+    import "swiper/css/pagination";
     import { Swiper, SwiperSlide } from 'swiper/vue';
+    import { Autoplay, EffectCube, Pagination,Navigation } from "swiper";
     import ServiceBar from './../components/ServiceBar'
+    
     export default{
         name:'index',
         components:{
@@ -38,16 +64,9 @@
             SwiperSlide,
             
         },
-        setup(){
-            const onSwiper=(swiper)=>{
-                console.log(swiper);
-            };
-            const onSlideChange = ()=>{
-                console.log('slide change');
-            };
+        setup() {
             return {
-                onSwiper,
-                onSlideChange,
+            modules: [EffectCube, Pagination, Autoplay,Navigation],
             };
         },
         data(){
@@ -56,12 +75,7 @@
                     autoplay:true,
                     loop:true,
                     effect:'cube',
-                    cubeEffect:{
-                        slideShadows:true,
-                        shadow:true,
-                        shadowOffsets:100,
-                        shadowScale:0.6
-                    },
+                    
                 },
                 slideList:[
                     {
@@ -108,12 +122,8 @@
                 height: 451px;
                 img{
                     width: 100%;
-                }
-           
-            
-        
-            
-            
+                }     
         }
     }
 </style>
+
