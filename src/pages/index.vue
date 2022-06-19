@@ -75,8 +75,7 @@
                     <div class="swiper-button-next" slot="button-next"></div>
                      -->
                      <!-- <div class="swiper-pagination"></div> -->
-                </swiper>
-                
+                </swiper>               
             </div>
             <div class="ads-box">
                 <a :href="'/#/product/'+item.id" v-for="(item,index) in adsList" v-bind:key="index">
@@ -89,9 +88,35 @@
                 </a>
             </div>
             
-            <div class="product-box"></div>
-        </div>
 
+        </div>
+        <div class="product-box">
+            <div class="container">
+                <h2>手机</h2>
+                <div class="wrapper">
+                    <div class="banner-left">
+                        <a href="/#/product/35"><img src="/imgs/mix-alpha.jpg" alt=""></a>
+                    </div>
+                    <div class="list-box">
+                        <div class="list" v-for="(arr,i) in phoneList" :key="i">
+                            <div class="item" v-for="(item,j) in arr" :key="j">
+                                <span :class="{'new-pro':j%2==0}">新品</span>
+                                <div class="item-img">
+                                    <img v-bind:src="item.mainImage" alt="">
+                                </div>
+                                <div class="item-info">
+                                    <h3>{{item.name}}</h3>
+                                    <p>{{item.subtitle}}</p>
+                                    <p class="price">{{item.price}}元</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
         <service-bar></service-bar>
 
     </div>
@@ -193,7 +218,24 @@
                         id:47,
                         img:'/imgs/ads/ads-4.jpg'
                     }
-                ]
+                ],
+                phoneList:[]
+            }
+        },
+        mounted(){
+            this.init();
+        },
+        methods:{
+            init(){
+                this.axios.get('/products',{
+                    params:{
+                        categoryId:100012,
+                        pageSize:8
+                    }
+                }).then((res)=>{
+                    this.phoneList=[res.list.slice(0,4),res.list.slice(4,8)]
+
+                })
             }
         }
     }
@@ -298,9 +340,103 @@
             .banner{
                 margin-bottom: 50px;
             }
+
                     
             
         }
+        .product-box{
+            background-color: $colorJ;
+            padding: 30px 0 50px;
+            h2{
+                font-size: $fontF;
+                height: 21px;
+                line-height: 21px;
+                color: $colorB;
+                margin-bottom: 10px;
+            }
+            .wrapper{
+                display: flex;
+                .banner-left{
+                    margin-right: 16px;
+                    img{
+                        width: 224px;
+                        height: 619px;
+                    }
+                    
+                }
+                .list-box{
+                    .list{
+                        @include flex();
+                        width: 986px;
+                        margin-bottom: 14px;
+                        &:last-child{
+                            margin-bottom: 0;
+                        }
+                        .item{
+                            width: 236px;
+                            height: 302px;
+                            background-color: $colorG;
+                            text-align: center;
+                            span{
+                                display: inline-block;
+                                width: 67px;
+                                height: 24px;
+                                line-height: 24px;
+                                font-size: $fontJ;
+                                color: $colorG;
+                                &.new-pro{
+                                    background-color: #7ECF68;
+                                }
+                                &.kill-pro{
+                                    background-color: #E82626;
+                                }
+                                
+                            }
+                            .item-img{
+                                
+                                img{
+                                    width: 100%;
+                                    
+                                    height: 195px;
+                                    margin: 0 auto;
+                                }
+                                
+
+                            }
+                            .item-info{
+                                h3{
+                                    font-size: $fontJ;
+                                    color: $colorB;
+                                    line-height: $fontJ;
+                                    font-weight: bold;
+                                }
+                                p{
+                                    color: $colorD;
+                                    line-height: 13px;
+                                    margin: 6px auto 13px;
+                                }
+                                .price{
+                                    color: #f20a0a;
+                                    font-size: $fontJ;
+                                    font-weight: bold;
+                                    cursor: pointer;
+                                    &:after{
+                                        content: "";
+                                        @include bgImg(22px,22px,'../../public/imgs/icon-cart-hover.png');
+                                        margin-left: 5px;
+                                        margin-bottom: 5px;
+                                        vertical-align: middle;
+                                    }
+
+                                }
+                            }
+                        }
+                            
+                        }
+                    }
+
+                }
+            }
         
     }
 </style>
