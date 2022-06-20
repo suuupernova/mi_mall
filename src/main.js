@@ -15,6 +15,7 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueLazyLoad from 'vue-lazyload'
 // import env from './env'
 //mock开关
 
@@ -43,4 +44,6 @@ axios.interceptors.response.use(function(response){
     }
 });
 
-createApp(App).use(router).use(VueAxios,axios).mount('#app')
+createApp(App).use(router).use(VueAxios,axios).use(VueLazyLoad,{
+    loading:'/imgs/loading-svg/loading-bars.svg'
+}).mount('#app')
