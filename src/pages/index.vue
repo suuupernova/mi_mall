@@ -107,7 +107,7 @@
                                 <div class="item-info">
                                     <h3>{{item.name}}</h3>
                                     <p>{{item.subtitle}}</p>
-                                    <p class="price">{{item.price}}元</p>
+                                    <p class="price" @click="addCart(item.id)">{{item.price}}元</p>
                                 </div>
                             </div>
                         </div>
@@ -120,8 +120,12 @@
         <service-bar></service-bar>
         <modal title="提示" 
                sureText="查看购物车" 
-               btnType="1" 
-               modalType="middle" :showModal="true">
+               btnType="3" 
+               modalType="middle" 
+               :showModal="showModal"
+               v-on:submit="goToCart"
+               v-on:cancel="showModal=false"
+               >
                <template v-slot:body>
                 <p>商品添加成功</p>
                </template>
@@ -230,7 +234,8 @@
                         img:'/imgs/ads/ads-4.jpg'
                     }
                 ],
-                phoneList:[]
+                phoneList:[],
+                showModal:false
             }
         },
         mounted(){
@@ -247,7 +252,23 @@
                     this.phoneList=[res.list.slice(6,10),res.list.slice(10,14)]
 
                 })
+            },
+            addCart(){
+                this.showModal=true;
+                
+                // this.axios.post('/carts',{
+                //     productId:id,
+                //     selected:true
+                // }).then(()=>{
+
+                // }).catch(()=>{
+                //     this.showModal=true;
+                // })
+            },
+            goToCart(){
+                this.$router.push('/cart')
             }
+
         }
     }
   

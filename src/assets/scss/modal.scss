@@ -2,11 +2,25 @@
 @import './config.scss';
 .modal{
   z-index: 10;
+  transition: all .5s;
   @include position(fixed);
   .mask{
     @include position(fixed);
     background-color: $colorI;
     opacity: 0.5;
+  }
+  &.slide-enter-active{
+    top: -110%;
+  }
+  &.slide-leave-active{
+    top: 0;
+  } 
+
+  &.slide-leave-to{
+    top: -110%;
+  }
+  &.slide-enter{
+    top: -110%;
   }
   .modal-dialog{
     @include position(absolute,40%,50%,660px,auto);
