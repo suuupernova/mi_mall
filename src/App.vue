@@ -47,7 +47,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 @import './assets/scss/reset.scss';
+@import './assets/scss/button.scss';
+
 </style>

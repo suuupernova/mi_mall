@@ -118,6 +118,14 @@
             
         </div>
         <service-bar></service-bar>
+        <modal title="提示" 
+               sureText="查看购物车" 
+               btnType="1" 
+               modalType="middle" :showModal="true">
+               <template v-slot:body>
+                <p>商品添加成功</p>
+               </template>
+        </modal>
 
     </div>
 
@@ -130,15 +138,18 @@
     import "swiper/css/pagination";
     import { Swiper, SwiperSlide } from 'swiper/vue';
     import { Autoplay, EffectCube, Pagination,Navigation } from "swiper";
-    import ServiceBar from './../components/ServiceBar'
+    import ServiceBar from './../components/ServiceBar.vue';
+    import Modal from './../components/Modal.vue';
+
     
     export default{
         name:'index',
         components:{
-
+            Modal,
             ServiceBar,
             Swiper,
             SwiperSlide,
+            
             
         },
         setup() {
@@ -230,10 +241,10 @@
                 this.axios.get('/products',{
                     params:{
                         categoryId:100012,
-                        pageSize:8
+                        pageSize:14
                     }
                 }).then((res)=>{
-                    this.phoneList=[res.list.slice(0,4),res.list.slice(4,8)]
+                    this.phoneList=[res.list.slice(6,10),res.list.slice(10,14)]
 
                 })
             }
