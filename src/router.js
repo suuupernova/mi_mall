@@ -1,6 +1,7 @@
 //import Vue from 'vue'
 //import Router from 'vue-router'
 import { createRouter,createWebHashHistory } from 'vue-router'
+import Login from './pages/login'
 import Home from './pages/home'
 import Index from './pages/index'
 import Product from './pages/product'
@@ -62,6 +63,12 @@ const routers = [{
                          component:Alipay,
                      }
                  ]
+             },
+             {
+                path:'/login',
+                name:'login',
+                component:Login,
+              
              },
              {
                  path:'/cart',
