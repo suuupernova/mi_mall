@@ -14,8 +14,7 @@
             <input type="text" placeholder="请输入帐号" v-model="username" />
           </div>
           <div class="input">
-            <input
-              type="password"
+            <input type="password"
               placeholder="请输入密码"
               v-model="password"
             />
@@ -55,71 +54,48 @@
   </div>
 </template>
 <script>
-import { getCurrentInstance, ref } from "vue";
-import cookie from "vue-cookie";
+//import { getCurrentInstance, ref } from "vue";
+//import cookie from "vue-cookie";
 export default {
   name: "login",
-  props: {
-    uname: {
-      type: String,
-      default: "Jack",
-    },
-  },
-  setup() {
-    const { ctx } = getCurrentInstance();
-    let username = ref("");
-    let password = ref("");
-    let userId = ref("");
-    let store = ctx.$store;
-    let router = ctx.$router;
-    const login = () => {
-      if (!username.value || !password.value) {
-        ctx.$message.error("请输入正确的用户名和密码");
-        return;
-      }
-      ctx.$axios
-        .post("/user/login", {
-          username: username.value,
-          password: password.value,
-        })
-        .then((res) => {
-          cookie.set("userId", res.id, { expires: "Session" });
-          store.commit("saveUserName", res.username);
-          router.push({
-            name: "index",
-            params: {
-              from: "login",
-            },
-          });
-        });
-    };
-    const register = () => {
-      ctx.$message.success("功能暂未开发");
-      return;
-      /*ctx.$axios
-        .post("/user/register", {
-          username: "admin1",
-          password: "admin1",
-          email: "admin1@163.com",
-        })
-        .then(() => {
-          ctx.$message.success("注册成功");
-        });*/
-    };
+  data() {
     return {
-      username,
-      password,
-      userId,
-      login,
-      register,
+      username: '',
+      password: '',
+      userId: '',
+      res: {}
     };
   },
+  methods: {
+    // 登录请求
+    login() {
+      let {
+        username,
+        password,
+      } = this;
+      this.axios.post('/user/login', {
+        username,
+        password
+      }).then((res) => {
+        this.res=res;
+        // this.$message.success('登录成功!');
+        // this.$cookie.set('userId', res.id, {expires: 'Session'});
+        // this.$store.dispatch('saveUserName', res.username);
+        this.$router.push({
+          name: 'index',
+          params: {
+            from: 'login'
+          }
+        });
+      })
+    }
+  }
+   
+    
+  
 };
 </script>
 <style lang="scss">
-@import '../assets/scss/base.scss';
-@import '../assets/scss/mixin.scss';
-@import '../assets/scss/config.scss';
 .login {
   & > .container {
     height: 113px;
@@ -140,8 +116,7 @@ export default {
         height: 510px;
         background-color: #ffffff;
         position: absolute;
-        top: 145px;
-        //bottom: 29px;
+        bottom: 29px;
         right: 0;
         h3 {
           line-height: 23px;
