@@ -15,6 +15,7 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import store from './store'
 //import VueCookie from 'vue-cookie'
 import VueLazyLoad from 'vue-lazyload'
 
@@ -46,7 +47,7 @@ axios.interceptors.response.use(function(response){
     }
 });
 
-createApp(App).use(router).use(VueAxios,axios).use(VueLazyLoad,{
+createApp(App).use(router).use(store).use(VueAxios,axios).use(VueLazyLoad,{
     loading:'/imgs/loading-svg/loading-bars.svg'
 }).mount('#app')
 

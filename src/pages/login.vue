@@ -57,7 +57,7 @@
 //import { getCurrentInstance, ref } from "vue";
 //import cookie from "vue-cookie";
 export default {
-  name: "login",
+  name: 'login',
   data() {
     return {
       username: '',
@@ -66,6 +66,7 @@ export default {
       res: {}
     };
   },
+  
   methods: {
     // 登录请求
     login() {
@@ -80,13 +81,8 @@ export default {
         this.res=res;
         // this.$message.success('登录成功!');
         // this.$cookie.set('userId', res.id, {expires: 'Session'});
-        // this.$store.dispatch('saveUserName', res.username);
-        this.$router.push({
-          name: 'index',
-          params: {
-            from: 'login'
-          }
-        });
+        this.$store.dispatch('saveUserName', res.username);
+        this.$router.push('/index');
       })
     }
   }
